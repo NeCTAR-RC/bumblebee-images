@@ -1,0 +1,13 @@
+---
+- name: add mate-screensaver schema with customized values
+  template:
+    src:  org.mate.screensaver.gschema.xml.j2
+    dest: "/usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.xml"
+
+- name: disable system menu on top panel
+  template:
+    src:  org.mate.panel.menubar.gschema.xml.j2
+    dest: "/usr/share/glib-2.0/schemas/org.mate.panel.menubar.gschema.xml"
+
+- name: recompile schema
+  command: "glib-compile-schemas /usr/share/glib-2.0/schemas/"

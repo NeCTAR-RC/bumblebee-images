@@ -1,0 +1,8 @@
+packer_cache/*
+*.box
+iso/*
+.vagrant
+*.retry
+ansible/inventory.cfg
+ansible/.facts
+*.log

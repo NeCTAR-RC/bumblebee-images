@@ -1,0 +1,7 @@
+---
+xrdp_packages:
+  - xorg-x11-server-Xorg
+  - xrdp
+  - xorgxrdp
+
+xorg_path: /usr/bin/Xorg

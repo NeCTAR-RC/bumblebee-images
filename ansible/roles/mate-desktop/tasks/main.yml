@@ -1,0 +1,32 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}_{{ ansible_distribution_version }}.yml"
+    - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
+
+- name: Install system packages (yum)
+  yum:
+    name: "{{ yum_system_packages }}"
+    exclude: "{{ yum_exclude_packages|default([]) }}"
+    state: present
+    update_cache: yes
+  become: true
+  when: yum_system_packages is defined
+
+- name: Install system packages (apt)
+  apt:
+   name: "{{ apt_system_packages }}"
+   state: present
+   update_cache: true
+   force: yes
+  become: true
+  when: apt_system_packages is defined
+
+- include: customise.yml
+- include: background.yml
+- include: menu.yml
+- include: default-session.yml

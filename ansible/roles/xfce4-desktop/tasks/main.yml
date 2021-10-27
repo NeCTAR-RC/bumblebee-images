@@ -1,0 +1,51 @@
+---
+- name: install xfce4 desktop packages
+  apt:
+    name: '{{ xfce4_apt_packages }}'
+    state: present
+    install_recommends: yes
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: remove unnecessary packages
+  apt:
+    name: '{{ remove_apt_packages }}'
+    state: absent
+    autoremove: yes
+  when: remove_apt_packages is defined
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install background
+  copy:
+    src: files/background.svg
+    dest: /usr/share/backgrounds/background.svg
+
+- name: create kiosk dir
+  file:
+    path: /etc/xdg/xfce4/kiosk
+    state: directory
+
+- name: Install kioskrc
+  copy:
+    src: files/xfce4/kiosk/kioskrc
+    dest: /etc/xdg/xfce4/kiosk/kioskrc
+
+- name: copy xfce4 default config
+  copy:
+    src: 'files/xfce4/xfconf/xfce-perchannel-xml/{{ item }}'
+    dest: '/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/{{ item }}'
+  with_items:
+    - xfce4-panel.xml
+    - xfce4-desktop.xml
+    - xfce4-power-manager.xml
+    - xfce4-screensaver.xml
+    - xsettings.xml
+
+- name: Disable lightdm on startup
+  service:
+    name: lightdm
+    state: stopped
+    enabled: false
+
+- include: policies.yml

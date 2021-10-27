@@ -1,0 +1,12 @@
+---
+
+- include: apt_setup.yml
+  when: ansible_os_family == 'Debian'
+
+- include: yum_setup.yml
+  when: ansible_distribution == 'CentOS'
+
+- include: etc_hosts.yml
+- include: remove_floppy.yml
+- include: timezone.yml
+- include: disable_apport.yml

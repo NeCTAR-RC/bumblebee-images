@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - image-name
+    - default-user
+    - setup
+    - xfce4-desktop
+    - owncloud-client
+    - xrdp
+    - config
+    - testing
+    - facts
+    - cleanup

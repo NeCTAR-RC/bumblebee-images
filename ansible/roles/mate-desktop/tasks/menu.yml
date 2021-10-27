@@ -1,0 +1,10 @@
+---
+- name: create mate-coesra.directory file in /usr/share/mate/desktop-directories
+  template:
+    src:  mate-coesra.directory.j2
+    dest: /usr/share/mate/desktop-directories/mate-coesra.directory
+
+- name: add coesra category to mate-applications.menu in /etc/xdg/menus
+  template:
+    src:  mate-applications.menu.j2
+    dest: /etc/xdg/menus/mate-applications.menu

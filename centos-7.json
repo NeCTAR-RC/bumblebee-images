@@ -1,0 +1,25 @@
+{
+  "builders": [
+    {
+      "type": "openstack",
+      "flavor": "t3.small",
+      "image_name": "NeCTAR CentOS 7 Virtual Desktop",
+      "source_image": "NeCTAR CentOS 7 x86_64",
+      "availability_zone": "melbourne-qh2",
+      "ssh_username": "ec2-user",
+      "security_groups": ["image-build"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "ansible/playbook-mate.yml"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ]
+}
+

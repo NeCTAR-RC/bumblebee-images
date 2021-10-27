@@ -1,0 +1,17 @@
+---
+xfce4_apt_packages:
+  - xubuntu-desktop
+
+remove_apt_packages:
+  - network-manager
+  - network-manager-gnome
+  - xfce4-power-manager
+  - xfce4-power-manager-data
+  - xfce4-power-manager-plugins
+  - light-locker
+  - xscreensaver
+  - xscreensaver-data
+  - gnome-session-bin  # remove these to force xfce as the default X session
+  - mate-session-manager
+  - bluez
+  - apport  # nuke the system program problem detected alert

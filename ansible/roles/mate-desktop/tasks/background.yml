@@ -1,0 +1,33 @@
+- name: copy background.svg over
+  become: yes
+  copy:
+    src: background.svg
+    dest: /usr/share/backgrounds/
+  when: ansible_distribution == "CentOS"
+
+- name: copy the background image config file over
+  template:
+    src: default.xml.j2
+    dest: "/usr/share/backgrounds/default.xml"
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "CentOS"
+
+- name: copy background.svg over
+  become: yes
+  copy:
+    src: background.svg
+    dest: /usr/share/backgrounds/ubuntu-mate-common/background.svg
+  when: ansible_distribution == "Ubuntu"
+
+- name: overwrite default background
+  become: yes
+  command: mv /usr/share/backgrounds/ubuntu-mate-common/Ubuntu-Mate-Cold.jpg /usr/share/backgrounds/ubuntu-mate-common/Ubuntu-Mate-Cold.jpg.o
+  when: ansible_distribution == "Ubuntu"
+
+- name: overwrite default background
+  become: yes
+  command: mv /usr/share/backgrounds/ubuntu-mate-common/background.svg /usr/share/backgrounds/ubuntu-mate-common/Ubuntu-Mate-Cold.jpg
+  when: ansible_distribution == "Ubuntu"
+

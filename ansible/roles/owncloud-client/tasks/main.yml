@@ -4,11 +4,13 @@
     url: '{{ owncloud_apt_repo_key_url }}'
     id: '{{ owncloud_apt_repo_key_id }}'
     state: present
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Add ownCloud client repository
   apt_repository:
     repo: '{{ owncloud_apt_repo_source }}'
     state: present
+  when: ansible_distribution == 'Ubuntu'
 
 - name: install ownCloud client
   package:

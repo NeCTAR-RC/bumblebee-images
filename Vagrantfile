@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
 
   # Generic Ubuntu 20.04 (focal)
-  config.vm.define "ubuntu2004" do |c|
+  config.vm.define "ubuntu-2004" do |c|
     c.vm.box = "generic/ubuntu2004"
     c.vm.provider "virtualbox" do |v, override|
       override.vm.box = "ubuntu/focal64"
@@ -10,18 +10,18 @@ Vagrant.configure("2") do |config|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true,
                              ansible_python_interpreter: "/usr/bin/python3" }
-      ansible.playbook = "ansible/playbook.yml"
+      ansible.playbook = "ansible/playbook-xfce4.yml"
       ansible.become = true
     end
   end
 
   # Generic CentOS 7
-  config.vm.define "centos7" do |c|
+  config.vm.define "centos-7" do |c|
     c.vm.box = "centos/7"
     c.vm.provision "ansible" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true }
-      ansible.playbook = "ansible/playbook.yml"
+      ansible.playbook = "ansible/playbook-mate.yml"
       ansible.become = true
     end
   end

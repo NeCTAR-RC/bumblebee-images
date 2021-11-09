@@ -1,16 +1,32 @@
 ---
-- name: Get ownCloud client apt key
+- name: Get ownCloud repository key for Ubuntu
   apt_key:
-    url: '{{ owncloud_apt_repo_key_url }}'
-    id: '{{ owncloud_apt_repo_key_id }}'
+    url: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_{{ ansible_distribution_version }}/Release.key"
     state: present
   when: ansible_distribution == 'Ubuntu'
 
-- name: Add ownCloud client repository
+- name: Add ownCloud repository for Ubuntu
   apt_repository:
-    repo: '{{ owncloud_apt_repo_source }}'
+    repo: "deb https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_{{ ansible_distribution_version }}/ /"
+    filename: owncloud
+    update_cache: yes
     state: present
   when: ansible_distribution == 'Ubuntu'
+
+- name: Import ownCloud repository key for CentOS
+  rpm_key:
+    state: present
+    key: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/CentOS_{{ ansible_distribution_major_version }}/repodata/repomd.xml.key"
+  when: ansible_distribution == 'CentOS'
+
+- name: Add ownCloud repository for CentOS
+  yum_repository:
+    name: owncloud
+    description: owncloud
+    baseurl: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/CentOS_{{ ansible_distribution_major_version }}"
+    gpgcheck: yes
+    gpgkey: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/CentOS_{{ ansible_distribution_major_version }}/repodata/repomd.xml.key"
+  when: ansible_distribution == 'CentOS'
 
 - name: install ownCloud client
   package:

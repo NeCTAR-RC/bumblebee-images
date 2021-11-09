@@ -11,7 +11,7 @@
     - default-user
     - setup
     - xfce4-desktop
-    - owncloud-client
+#    - owncloud-client
     - xrdp
     - config
     - testing

@@ -12,22 +12,11 @@ from glanceclient import exc as glance_exc
 from keystoneauth1 import loading as ks_loading
 from keystoneauth1 import session as ks_session
 
-
-# Simple coloured output
-logging.addLevelName(logging.DEBUG,   "\033[1;32m %s \033[1;m"
-                     % logging.getLevelName(logging.DEBUG))
-logging.addLevelName(logging.INFO,    "\033[1;36m %s  \033[1;m"
-                     % logging.getLevelName(logging.INFO))
-logging.addLevelName(logging.WARNING, "\033[1;33m%s\033[1;m"
-                     % logging.getLevelName(logging.WARNING))
-logging.addLevelName(logging.ERROR,   "\033[1;31m %s \033[1;m"
-                     % logging.getLevelName(logging.ERROR))
-
-FORMAT = "[%(levelname)s] %(message)s"
+FORMAT = "[%(asctime)s] %(levelname)s %(message)s"
 
 logging.basicConfig(
     format=FORMAT,
-    level=logging.WARNING,
+    level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
 
 LOG = logging.getLogger(__name__)

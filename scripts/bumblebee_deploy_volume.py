@@ -76,13 +76,14 @@ def do_stuff(args):
 
     image_id = image['id']
     image_name = image['name']
-    image_build = image['nectar_build']
+    nectar_name = image['nectar_build']
+    nectar_build = image['nectar_build']
 
     for az in zones:
         volumes = [
             v for v in cc.volumes.list()
             if v.volume_image_metadata.get('image_id') == image_id
-            and v.volume_image_metadata.get('nectar_build') == image_build
+            and v.volume_image_metadata.get('nectar_build') == nectar_build
             and v.name == image_name
             and v.availability_zone == az]
 
@@ -98,7 +99,8 @@ def do_stuff(args):
                 LOG.info('Creating volume for %s in %s AZ',
                          image_name, az)
                 metadata = {
-                    'nectar_build': image_build,
+                    'nectar_name': nectar_name,
+                    'nectar_build': nectar_build,
                 }
                 vol = cc.volumes.create(
                     VOLUME_SIZE, availability_zone=az, imageRef=image_id,

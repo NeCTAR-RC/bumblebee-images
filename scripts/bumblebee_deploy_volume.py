@@ -63,7 +63,7 @@ def do_stuff(args):
     session = get_session()
     gc = glance_client.Client('2', session=session)
     cc = cinder_client.Client('3', session=session)
-    
+
     zones = args.zones.split(',')
     LOG.info('Processing image ID %s for zones: %s', args.image_id, args.zones)
 
@@ -82,7 +82,8 @@ def do_stuff(args):
     for az in zones:
         volumes = [
             v for v in cc.volumes.list()
-            if v.volume_image_metadata.get('image_id') == image_id
+            if hasattr(v, 'volume_image_metadata')
+            and v.volume_image_metadata.get('image_id') == image_id
             and v.volume_image_metadata.get('nectar_build') == nectar_build
             and v.name == image_name
             and v.availability_zone == az]

@@ -17,9 +17,11 @@
   authorized_key:
     user: nectar
     state: present
-    key: service_instance_ca.pub
+    key: '{{ item }}'
     exclusive: yes
     key_options: 'cert-authority'
+  with_file:
+    - service_instance_ca.pub
 
 - name: Create Nectar user sudoers file
   copy:

@@ -24,8 +24,6 @@ LOG.setLevel(logging.INFO)
 
 DRY_RUN = True
 
-VOLUME_SIZE = 10
-
 
 def get_session():
     username = os.environ.get('OS_USERNAME')
@@ -104,7 +102,7 @@ def do_stuff(args):
                     'nectar_build': nectar_build,
                 }
                 vol = cc.volumes.create(
-                    VOLUME_SIZE, availability_zone=az, imageRef=image_id,
+                    args.size, availability_zone=az, imageRef=image_id,
                     name=image_name, metadata=metadata)
 
                 if args.wait:
@@ -123,6 +121,8 @@ def main():
                         help='Show debug logging.')
     parser.add_argument('-w', '--wait', action='store_true',
                         help='Wait for status')
+    parser.add_argument('-s', '--size', default=50, type=int,
+                        help='Volume size in GB (default 50)')
     parser.add_argument('-y', '--no-dry-run', action='store_true',
                         default=False,
                         help='Perform the actual actions, default is to \

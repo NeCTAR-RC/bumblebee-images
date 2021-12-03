@@ -15,5 +15,6 @@
     - xrdp
     - config
     - testing
+    - nectar-user
     - facts
     - cleanup

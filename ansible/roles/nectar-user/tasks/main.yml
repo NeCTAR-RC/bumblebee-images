@@ -1,0 +1,29 @@
+---
+- name: Create Nectar group
+  group:
+    name: nectar
+    state: present
+
+- name: Create Nectar user
+  user:
+    name: nectar
+    comment: 'Nectar Admin'
+    group: nectar
+    home: /var/lib/nectar
+    createhome: yes
+    shell: /bin/bash
+
+- name: Install SSH CA trusted public key for Nectar user
+  authorized_key:
+    user: nectar
+    state: present
+    key: service_instance_ca.pub
+    exclusive: yes
+    key_options: 'cert-authority'
+
+- name: Create Nectar user sudoers file
+  copy:
+    dest: /etc/sudoers.d/60_nectar_user
+    content: 'nectar ALL=(ALL)   NOPASSWD:ALL'
+    mode: 0440
+    validate: 'visudo -cf %s'

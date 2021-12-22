@@ -26,7 +26,5 @@
   become: true
   when: apt_system_packages is defined
 
-- include_tasks: customise.yml
-- include_tasks: background.yml
-- include_tasks: menu.yml
-- include_tasks: default-session.yml
+#- include_tasks: background.yml
+#- include_tasks: default-session.yml

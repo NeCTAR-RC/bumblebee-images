@@ -1,0 +1,10 @@
+---
+- name: Install CVMFS release
+  apt:
+    deb: https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
+
+- name: Install CVMFS
+  apt:
+    pkg: cvmfs
+    state: present
+    update_cache: yes

@@ -1,0 +1,81 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+    - "default.yml"
+
+- name: install extra packages
+  package:
+    name: "{{ neurodesk_extra_packages }}"
+    state: present
+
+- name: Copy config files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: rc.xml
+      dest: /etc/xdg/openbox/
+    - src: .itksnap.org
+      dest: /etc/skel/.itksnap.org
+    - src: mimeapps.list
+      dest: /etc/skel/.config/
+    - src: panel
+      dest: /etc/skel/.config/lxpanel/LXDE/panels/
+    - src: desktop_wallpaper.jpg
+      dest: /usr/share/lxde/wallpapers/
+    - src: pcmanfm.conf
+      dest: /etc/xdg/pcmanfm/LXDE/
+    - src: lxterminal.conf
+      dest: /usr/share/lxterminal/
+    - src: vscode/settings.json
+      dest: /etc/skel/.config/Code/User/
+
+- name: Copy module system
+  copy:
+    src: module.sh
+    dest: /usr/share/
+
+- name: Create storage directory
+  file:
+    path: /neurodesktop-storage
+    state: directory
+
+- name: Create storage directory
+  file:
+    path: /etc/skel/Desktop
+    state: directory
+
+- name: Create a symbolic link
+  file:
+    src: /neurodesktop-storage
+    dest: /etc/skel/Desktop/neurodesktop-storage
+    state: link
+
+#TODO(andybotting): Not needed outside a container?
+# Allow the root user to access the sshfs mount
+# https://github.com/NeuroDesk/neurodesk/issues/47
+- name: Ensure SELinux is set to enforcing mode
+  lineinfile:
+    path: /etc/fuse.conf
+    regexp: '#user_allow_other'
+    line: 'user_allow_other'
+
+- name: Change Firefox home
+  lineinfile:
+    dest: /etc/firefox/syspref.js
+    line: "{{ item }}"
+  with_items:
+    - 'pref("browser.startup.homepage", "http://neurodesk.github.io", locked);'
+    - 'pref("browser.startup.firstrunSkipsHomepage", true, locked);'
+    - 'pref("startup.homepage_welcome_url", "http://neurodesk.github.io", locked);'
+    - 'pref("browser.aboutwelcome.enabled", true, locked);'
+
+- include_tasks: globus.yml
+- include_tasks: cvmfs.yml
+- include_tasks: singularity.yml
+- include_tasks: julia.yml
+- include_tasks: datalad.yml
+- include_tasks: neurocommand.yml

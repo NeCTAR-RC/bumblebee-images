@@ -1,0 +1,6 @@
+---
+singularity_version: 3.9.1
+singularity_install_prefix: /usr/local/singularity
+
+go_version: 1.17.2
+go_path: /tmp/go-path

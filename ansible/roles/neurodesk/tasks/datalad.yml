@@ -1,0 +1,18 @@
+---
+- name: Add NeuroDebian key
+  apt_key:
+    url: http://neuro.debian.net/_static/neuro.debian.net.asc
+    state: present
+
+- name: Add NeuroDebian repository
+  apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - "deb http://mirror.aarnet.edu.au/pub/neurodebian {{ ansible_distribution_release }} main contrib non-free"
+    - "deb http://mirror.aarnet.edu.au/pub/neurodebian data main contrib non-free"
+
+- name: Install datalad
+  apt:
+    name: datalad
+    state: present
+    update_cache: true

@@ -1,0 +1,9 @@
+---
+singularity_dependencies:
+  - build-essential
+  - libssl-dev
+  - uuid-dev
+  - libgpgme11-dev
+  - squashfs-tools
+  - libseccomp-dev
+  - pkg-config

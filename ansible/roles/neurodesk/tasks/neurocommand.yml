@@ -1,0 +1,14 @@
+---
+- name: Clone NeuroDesk repository
+  git:
+    repo: https://github.com/NeuroDesk/neurocommand.git
+    dest: /neurocommand
+
+- name: Install NeuroCommand
+  shell: "{{ item }}"
+  args:
+    chdir: /neurocommand
+    creates: /usr/share/applications/neurodesk
+  with_items:
+    - ./build.sh --lxde --edit
+    - ./install.sh

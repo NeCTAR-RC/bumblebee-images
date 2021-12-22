@@ -1,12 +1,8 @@
 ---
 
-- include: apt_setup.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks: 'setup-{{ ansible_pkg_mgr }}.yml'
 
-- include: yum_setup.yml
-  when: ansible_distribution == 'CentOS'
-
-- include: etc_hosts.yml
-- include: remove_floppy.yml
-- include: timezone.yml
-- include: disable_apport.yml
+- include_tasks: etc_hosts.yml
+- include_tasks: remove_floppy.yml
+- include_tasks: timezone.yml
+- include_tasks: disable_apport.yml

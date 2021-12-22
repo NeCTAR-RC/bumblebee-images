@@ -1,0 +1,21 @@
+---
+yum_system_packages:
+  - '@^lxde-desktop'
+  - '@^graphical-server-environment'
+  - libXcomposite
+  - libXdamage
+  - mesa-libEGL
+  - mesa-libgbm
+  - harfbuzz
+  - mesa-libglapi
+  - graphite2
+  - xterm
+  - libpng
+  - xorg-x11-fonts-100dpi
+  - xorg-x11-fonts-75dpi
+  - xorg-x11-fonts-misc
+
+yum_exclude_packages:
+ - 'firewall*'
+ - 'initial-setup*'
+ - 'anaconda*'

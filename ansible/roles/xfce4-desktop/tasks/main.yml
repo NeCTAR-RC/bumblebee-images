@@ -48,4 +48,4 @@
     state: stopped
     enabled: false
 
-- include: policies.yml
+- include_tasks: policies.yml

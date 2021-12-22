@@ -1,0 +1,65 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ vars_item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+  loop_control:
+    loop_var: vars_item
+
+- name: Install Singularity depenencies for Ubuntu
+  apt:
+    name: "{{ singularity_dependencies }}"
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Singularity depenencies for CentOS
+  yum:
+    name: "{{ singularity_dependencies }}"
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Download and extract Go
+  unarchive:
+    src: "https://dl.google.com/go/go{{ go_version }}.linux-{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}.tar.gz"
+    dest: /tmp
+    remote_src: yes
+
+- name: Create go path
+  file:
+    path: "{{ go_path }}"
+    state: directory
+
+- name: Create singularity build directory
+  file:
+    path: "{{ go_path }}/src/github.com/sylabs"
+    state: directory
+
+- name: Download and extract the singularity archive
+  unarchive:
+    src: "https://github.com/sylabs/singularity/releases/download/v{{ singularity_version }}/singularity-ce-{{ singularity_version }}.tar.gz"
+    dest: "{{ go_path }}/src/github.com/sylabs"
+    remote_src: yes
+
+- name: Build and install Singularity
+  shell: "{{ item }}"
+  args:
+    chdir: "{{ go_path }}/src/github.com/sylabs/singularity-ce-{{ singularity_version }}"
+    creates: "{{ singularity_install_prefix }}/bin/singularity"
+  environment:
+    GOPATH: "{{ go_path }}"
+    PATH: "/tmp/go/bin:{{ ansible_env.PATH }}"
+  with_items:
+    - "./mconfig --prefix={{ singularity_install_prefix }}"
+    - make -C builddir
+    - make -C builddir install
+
+- name: Clean up
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - "{{ go_path }}"
+    - /tmp/go

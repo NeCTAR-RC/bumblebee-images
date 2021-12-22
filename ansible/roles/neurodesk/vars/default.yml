@@ -1,0 +1,52 @@
+---
+# Singularity bind mount list
+neurodesk_mountpoint_list_url: https://raw.githubusercontent.com/NeuroDesk/neurocontainers/master/recipes/globalMountPointList.txt
+
+# Install basic tools
+neurodesk_extra_packages:
+  - cryptsetup
+  - squashfs-tools
+  - lua-bit32
+  - lua-filesystem
+  - lua-json
+  - lua-lpeg
+  - lua-posix
+  - lua-term
+  - lua5.2
+  - lmod
+  - git
+  - aria2
+  - emacs
+  - gedit
+  - htop
+  - imagemagick
+  - less
+  - nano
+  - openssh-client
+  - rsync
+  - screen
+  - tree
+  - vim
+  - gcc
+  - graphviz
+  - libzstd1
+  - libgfortran5
+  - zlib1g-dev
+  - zip
+  - unzip
+  - iputils-ping
+  - sshfs
+  - build-essential
+  - uuid-dev
+  - libgpgme-dev
+  - squashfs-tools
+  - libseccomp-dev
+  - wget
+  - pkg-config
+  - git
+  - cryptsetup-bin
+  - lsb-release
+  - rclone
+  - davfs2
+  - firefox
+  - python3-distutils

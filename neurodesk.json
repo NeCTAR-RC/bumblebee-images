@@ -13,7 +13,11 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/playbook-neurodesk.yml"
+      "playbook_file": "ansible/playbook-neurodesk.yml",
+      "extra_arguments": [
+        "--extra-vars",
+        "image_name='Neurodesktop'"
+      ]
     },
     {
       "type": "shell",

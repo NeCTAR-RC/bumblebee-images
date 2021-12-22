@@ -1,6 +1,6 @@
 ---
-- name: Set Mate as default desktop on CentOS 7
-  copy:
-    dest: /etc/sysconfig/desktop
-    content: 'PREFERRED=mate-session'
-  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7
+- name: Set LXDE as the default desktop on Debian
+  alternatives:
+    name: x-session-manager
+    path: /usr/bin/startlxde
+  when: ansible_os_family == 'Debian'

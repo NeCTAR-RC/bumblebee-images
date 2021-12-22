@@ -31,3 +31,8 @@
   systemd:
     name: setup-cvmfs
     enabled: yes
+
+- name: Disable autofs
+  systemd:
+    name: autofs
+    enabled: no

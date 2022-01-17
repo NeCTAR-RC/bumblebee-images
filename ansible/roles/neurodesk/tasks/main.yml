@@ -38,21 +38,22 @@
     src: module.sh
     dest: /usr/share/
 
-- name: Create storage directory
-  file:
-    path: /neurodesktop-storage
-    state: directory
+# Steffen: Not necessary yet, because there is currently no persitent storage outside of this VM
+# - name: Create storage directory
+#   file:
+#     path: /neurodesktop-storage
+#     state: directory
 
-- name: Create storage directory
-  file:
-    path: /etc/skel/Desktop
-    state: directory
+# - name: Create storage directory
+#   file:
+#     path: /etc/skel/Desktop
+#     state: directory
 
-- name: Create a symbolic link
-  file:
-    src: /neurodesktop-storage
-    dest: /etc/skel/Desktop/neurodesktop-storage
-    state: link
+# - name: Create a symbolic link
+#   file:
+#     src: /neurodesktop-storage
+#     dest: /etc/skel/Desktop/neurodesktop-storage
+#     state: link
 
 #TODO(andybotting): Not needed outside a container?
 # Allow the root user to access the sshfs mount

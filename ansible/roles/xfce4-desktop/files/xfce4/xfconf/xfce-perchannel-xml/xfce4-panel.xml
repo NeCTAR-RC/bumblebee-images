@@ -16,9 +16,7 @@
         <value type="int" value="4"/>
         <value type="int" value="5"/>
         <value type="int" value="6"/>
-        <value type="int" value="7"/>
         <value type="int" value="8"/>
-        <value type="int" value="9"/>
       </property>
     </property>
   </property>
@@ -35,13 +33,8 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-6" type="string" value="pager"/>
-    <property name="plugin-7" type="string" value="clock"/>
-    <property name="plugin-8" type="string" value="systray">
-      <property name="names-hidden" type="array">
-        <value type="string" value="network"/>
-        <value type="string" value="networkmanager applet"/>
-      </property>
+    <property name="plugin-8" type="empty">
+      <property name="show-frame" type="bool" value="false"/>
     </property>
-    <property name="plugin-9" type="string" value="actions"/>
   </property>
 </channel>

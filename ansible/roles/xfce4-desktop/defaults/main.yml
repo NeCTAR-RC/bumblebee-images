@@ -8,6 +8,7 @@ remove_apt_packages:
   - xfce4-power-manager
   - xfce4-power-manager-data
   - xfce4-power-manager-plugins
+  - update-notifier
   - light-locker
   - xscreensaver
   - xscreensaver-data

@@ -14,3 +14,5 @@ xrdp_packages:
   - xorgxrdp
 
 xorg_path: /usr/lib/xorg/Xorg
+
+pulseaudio_modules_dir: /usr/lib/pulse-13.99.1/modules

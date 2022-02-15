@@ -1,18 +1,30 @@
 ---
 xfce4_apt_packages:
   - xubuntu-desktop
+  - libpulse0
 
 remove_apt_packages:
+  - apport  # nuke the system program problem detected alert
+  - at-spi2-core
+  - blueman
+  - bluez
+  - evolution-data-server
+  - geoclue-2.0
+  - gnome-session-bin  # remove these to force xfce as the default X session
+  - gnome-settings-daemon
+  - gnome-shell
+  - gnome-software
+  - light-locker
+  - mate-session-manager
   - network-manager
   - network-manager-gnome
+  - spice-vdagent
+  - system-config-printer
+  - unity-settings-daemon
+  - update-notifier
   - xfce4-power-manager
   - xfce4-power-manager-data
   - xfce4-power-manager-plugins
-  - update-notifier
-  - light-locker
+  - xiccd
   - xscreensaver
   - xscreensaver-data
-  - gnome-session-bin  # remove these to force xfce as the default X session
-  - mate-session-manager
-  - bluez
-  - apport  # nuke the system program problem detected alert

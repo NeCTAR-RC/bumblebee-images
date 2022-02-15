@@ -12,9 +12,9 @@
   apt:
     name: '{{ remove_apt_packages }}'
     state: absent
+    purge: yes
     autoremove: yes
   when: remove_apt_packages is defined
-  when: ansible_distribution == 'Ubuntu'
 
 - name: Install background
   copy:

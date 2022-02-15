@@ -11,8 +11,8 @@
     - default-user
     - setup
     - xfce4-desktop
-#    - owncloud-client
     - xrdp
+    - owncloud-client
     - config
     - testing
     - nectar-user

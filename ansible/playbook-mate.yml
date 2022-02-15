@@ -11,8 +11,8 @@
     - default-user
     - setup
     - mate-desktop
-#    - owncloud-client
     - xrdp
+    - owncloud-client
     - config
     - testing
     - nectar-user

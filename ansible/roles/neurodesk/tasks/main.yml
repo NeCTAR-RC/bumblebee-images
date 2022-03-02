@@ -48,12 +48,6 @@
     path: /etc/skel/Desktop
     state: directory
 
-- name: Create a symbolic link
-  file:
-    src: /neurodesktop-storage
-    dest: /etc/skel/Desktop/neurodesktop-storage
-    state: link
-
 #TODO(andybotting): Not needed outside a container?
 # Allow the root user to access the sshfs mount
 # https://github.com/NeuroDesk/neurodesk/issues/47

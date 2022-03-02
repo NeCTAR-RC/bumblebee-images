@@ -106,12 +106,6 @@ if [ -n "$HOST_GID" ]; then
 fi
 cd /home/user
 
-# Create vscode config on persistant storage
-mkdir -p /neurodesktop-storage/.config/Code
-chown -R user:user /neurodesktop-storage/.config
-mkdir -p /neurodesktop-storage/.vscode
-chown -R user:user /neurodesktop-storage/.vscode
-
 open_guacmole_conf
 if [ -n "$VNC_ENABLE" ]; then
     vnc_enable

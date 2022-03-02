@@ -20,6 +20,8 @@
       dest: /etc/xdg/openbox/
     - src: .itksnap.org
       dest: /etc/skel/.itksnap.org
+    - src: .bashrc
+      dest: /etc/skel/.bashrc
     - src: mimeapps.list
       dest: /etc/skel/.config/
     - src: panel
@@ -42,6 +44,7 @@
   file:
     path: /neurodesktop-storage
     state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
 
 - name: Create storage directory
   file:

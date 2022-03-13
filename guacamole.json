@@ -1,0 +1,28 @@
+{
+  "builders": [
+    {
+      "type": "openstack",
+      "flavor": "t3.small",
+      "image_name": "Guacamole Server",
+      "source_image": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
+      "availability_zone": "melbourne-qh2",
+      "ssh_username": "ubuntu",
+      "security_groups": ["image-build"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "ansible/playbook-guacamole.yml",
+      "extra_arguments": [
+        "--extra-vars",
+        "image_name='Guacamole Server'"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ]
+}

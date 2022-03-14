@@ -29,3 +29,4 @@ guacamole_packages:
   - libvorbis-dev
   - libwebp-dev
   - libwebsockets-dev
+  - libmariadb-java

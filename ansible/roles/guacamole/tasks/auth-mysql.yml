@@ -16,29 +16,16 @@
     dest: /etc/guacamole/extensions
     remote_src: yes
 
-- name: Download MySQL Java connector
-  get_url:
-    url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-{{ guacamole_mysql_connector_java_version }}.tar.gz"
-    dest: /tmp
-
-- name: Extract MySQL Java connector
-  unarchive:
-    src: "/tmp/mysql-connector-java-{{ guacamole_mysql_connector_java_version }}.tar.gz"
-    copy: no
-    dest: /tmp
-
 - name: Install MySQL Java connector
-  copy:
-    src: "/tmp/mysql-connector-java-{{ guacamole_mysql_connector_java_version }}/mysql-connector-java-{{ guacamole_mysql_connector_java_version }}.jar"
-    dest: /etc/guacamole/lib
-    remote_src: yes
+  file:
+    src: /usr/share/java/mariadb-java-client.jar
+    path: /etc/guacamole/lib/mariadb-java-client.jar
+    state: link
 
-- name: Clean up Guacamole OIDC and MySQL temp files
+- name: Clean up Guacamole OIDC temp files
   file:
     path: "{{ item }}"
     state: absent
   with_items:
     - "/tmp/guacamole-auth-jdbc-{{ guacamole_version }}.tar.gz"
     - "/tmp/guacamole-auth-jdbc-{{ guacamole_version }}"
-    - "/tmp/mysql-connector-java-{{ guacamole_mysql_connector_java_version }}.tar.gz"
-    - "/tmp/mysql-connector-java-{{ guacamole_mysql_connector_java_version }}"

@@ -37,7 +37,8 @@
     mode: '0755'
 
 - name: Remove default pulseaudio config for Focal
-  lineinfile:
-    dest: /etc/xrdp/sesman.ini
+  ini_file:
+    path: /etc/xrdp/sesman.ini
+    section: SessionVariables
+    option: PULSE_SCRIPT
     state: absent
-    regexp: "^PULSE_SCRIPT"

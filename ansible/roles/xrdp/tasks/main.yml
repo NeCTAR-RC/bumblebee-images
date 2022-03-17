@@ -57,4 +57,3 @@
     - xrdp-sesman
 
 - include_tasks: pulseaudio.yml
-  when: ansible_distribution == 'Ubuntu'

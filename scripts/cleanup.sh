@@ -8,6 +8,9 @@ rm -fr /root/'~'*
 # Truncate any log files
 find /var/log -type f -print0 | xargs -0 truncate -s0
 
+# Truncate resolv.conf if it exists
+truncate -c -s 0 /etc/resolv.conf
+
 # Clean up Ubuntu user
 userdel -rf ubuntu || true
 userdel -rf ec2-user || true

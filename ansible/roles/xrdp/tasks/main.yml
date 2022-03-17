@@ -40,21 +40,13 @@
   shell: 'echo "xserver-xorg-legacy xserver-xorg-legacy/xwrapper/allowed_users select Anybody" | debconf-set-selections'
   when: ansible_distribution == 'Ubuntu'
 
-- name: Disable all non-xorg backends in Xrdp
-  ini_file:
-    path: /etc/xrdp/xrdp.ini
-    section: "{{ item }}"
-    state: absent
+- name: Add XRDP config files
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/xrdp/{{ item }}"
   with_items:
-    - Xvnc
-    - vnc-any
-    - neutrinordp-any
-
-- name: Disable all non-xorg backends in sesman
-  ini_file:
-    path: /etc/xrdp/sesman.ini
-    section: Xvnc
-    state: absent
+    - xrdp.ini
+    - sesman.ini
 
 - name: Enable XRDP and sesman services
   service:

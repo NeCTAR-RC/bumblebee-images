@@ -26,7 +26,7 @@
       dest: /etc/skel/.config/
     - src: panel
       dest: /etc/skel/.config/lxpanel/LXDE/panels/
-    - src: desktop_wallpaper.jpg
+    - src: background.svg
       dest: /usr/share/lxde/wallpapers/
     - src: pcmanfm.conf
       dest: /etc/xdg/pcmanfm/LXDE/

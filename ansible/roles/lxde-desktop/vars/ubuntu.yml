@@ -4,3 +4,4 @@ lxde_packages:
 
 lxde_exclude_packages:
   - clipit
+  - xscreensaver

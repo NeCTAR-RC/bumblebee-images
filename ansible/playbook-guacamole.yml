@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - vars/guacamole.yml
+
+  roles:
+    - image-name
+    - default-user
+    - guacamole
+    - nectar-user
+    - facts
+    - cleanup

@@ -40,11 +40,20 @@
   shell: 'echo "xserver-xorg-legacy xserver-xorg-legacy/xwrapper/allowed_users select Anybody" | debconf-set-selections'
   when: ansible_distribution == 'Ubuntu'
 
-- name: Start XRDP
+- name: Add XRDP config files
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/xrdp/{{ item }}"
+  with_items:
+    - xrdp.ini
+    - sesman.ini
+
+- name: Enable XRDP and sesman services
   service:
-    name: xrdp
+    name: "{{ item }}"
     enabled: yes
-    state: started
+  with_items:
+    - xrdp
+    - xrdp-sesman
 
 - include_tasks: pulseaudio.yml
-  when: ansible_distribution == 'Ubuntu'

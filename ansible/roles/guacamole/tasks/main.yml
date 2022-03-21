@@ -1,0 +1,5 @@
+---
+- include: server.yml
+- include: client.yml
+- include: auth-mysql.yml
+- include: auth-openid.yml

@@ -1,0 +1,100 @@
+---
+# These packages were pulled from the Fedora Scientific Kickstart so we can
+# simply install these on top of regular F35 to make it equivalent to the
+# Scientific spin.
+# See https://pagure.io/fedora-kickstarts/tree/main for the kickstarts
+fedora_scientific_packages:
+- '@c-development'
+- '@development-libs'
+- '@development-tools'
+- '@engineering-and-scientific'
+- '@firefox'
+- '@java-development'
+- '@kde-desktop-environment'
+- '@kde-apps'
+- '@kde-media'
+- '@libreoffice'
+- '@rpm-development-tools'
+- BibTool
+- apache-commons-math
+- armadillo-devel
+- backintime-kde
+- bibtex2html
+- blitz-devel
+- ddd
+- dia
+- emacs
+- emacs-color-theme
+- fedora-release-kde
+- fig2ps
+- firefox
+- fuse
+- gcc-gfortran
+- gimp
+- git
+- git-gui
+- hevea
+- hexchat
+- inkscape
+- julia
+- julia-devel
+- julia-doc
+- kde-l10n
+- kile
+- libgomp
+- libotf
+- libreoffice-draw
+- libreoffice-math
+- lyx
+- mercurial
+- mercurial-hgk
+- openmpi
+- openmpi-devel
+- pdfshuffler
+- python3
+- python3-ipython
+- python3-ipython-console
+- python3-ipython-notebook
+- python3-matplotlib
+- python3-matplotlib-qt5
+- python3-matplotlib-tk
+- python3-mpi4py-mpich
+- python3-mpi4py-openmpi
+- python3-networkx
+- python3-numpy
+- python3-pandas
+- python3-scipy
+- python3-spyder
+- python3-spyder-kernels
+- python3-sympy
+- python3-tools
+- rapidsvn 
+- rkward
+- rlwrap
+- root
+- root-gui-fitpanel
+- rstudio-desktop  # Addition by Andy
+- screen
+- scribus
+- tmux
+- valgrind
+- valgrind-openmpi
+- vim
+- xzgv
+
+fedora_scientific_packages_exclude:
+- desktop-backgrounds-basic
+- digikam
+- gnome-disk-utility
+- iok
+- k3b
+- 'kdeaccessibility*'
+- kipi-plugins
+- krusader
+- ktorrent
+- sagemath
+- 'scim*'
+- system-config-printer
+- system-config-services
+- system-config-users
+- '@admin-tools'

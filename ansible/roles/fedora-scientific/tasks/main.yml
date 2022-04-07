@@ -1,0 +1,12 @@
+---
+- name: install Fedora Scientific packages
+  become: yes
+  dnf:
+    name: "{{ fedora_scientific_packages }}"
+    exclude: "{{ fedora_scientific_packages_exclude }}"
+    state: present
+
+- name: disable kde lockscreen
+  copy:
+    src: kscreenlockerrc
+    dest: /etc/xdg/

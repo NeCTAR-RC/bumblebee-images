@@ -26,6 +26,17 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # Fedora Scientific
+  config.vm.define "fedora-scientific" do |c|
+    c.vm.box = "fedora/35-cloud-base"
+    c.vm.provision "ansible" do |ansible|
+      ansible.compatibility_mode = "2.0"
+      ansible.extra_vars = { nectar_test_build: true }
+      ansible.playbook = "ansible/playbook-fedora-scientific.yml"
+      ansible.become = true
+    end
+  end
+
   # NeuroDesk
   config.vm.define "neurodesk" do |c|
     c.vm.box = "generic/ubuntu2004"

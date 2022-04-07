@@ -57,3 +57,4 @@
     - xrdp-sesman
 
 - include_tasks: pulseaudio.yml
+  when: pulseaudio_modules_dir is defined

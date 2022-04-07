@@ -1,0 +1,29 @@
+{
+  "builders": [
+    {
+      "type": "openstack",
+      "flavor": "t3.small",
+      "image_name": "Fedora Scientific",
+      "source_image": "NeCTAR Fedora 35 x86_64",
+      "availability_zone": "melbourne-qh2",
+      "ssh_username": "fedora",
+      "security_groups": ["image-build"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "ansible/playbook-fedora-scientific.yml",
+      "extra_arguments": [
+        "--extra-vars",
+        "image_name='Fedora Scientific'"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ]
+}
+

@@ -13,3 +13,4 @@
 - include_tasks: remove_floppy.yml
 - include_tasks: timezone.yml
 - include_tasks: disable_apport.yml
+- include_tasks: background.yml

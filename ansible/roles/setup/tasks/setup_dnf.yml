@@ -1,0 +1,12 @@
+---
+- name: Perform a full upgrade
+  yum:
+    name: '*'
+    state: latest
+  when: nectar_test_build is not defined
+
+- name: Install extra packages
+  package:
+    name: "{{ install_packages | default([]) + extra_packages | default([]) }}"
+    update_cache: yes
+    state: latest

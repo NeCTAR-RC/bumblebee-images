@@ -98,3 +98,5 @@ fedora_scientific_packages_exclude:
 - system-config-services
 - system-config-users
 - '@admin-tools'
+- firewalld  # Addition by Andy
+- firewall-config  # Addition by Andy

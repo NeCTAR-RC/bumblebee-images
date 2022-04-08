@@ -2,11 +2,13 @@
   "builders": [
     {
       "type": "openstack",
-      "flavor": "t3.small",
+      "flavor": "m3.small",
       "image_name": "Fedora Scientific",
       "source_image": "NeCTAR Fedora 35 x86_64",
       "availability_zone": "melbourne-qh2",
       "ssh_username": "fedora",
+      "ssh_keypair_name": "packer-ssh-key",
+      "ssh_private_key_file": "packer-ssh-key",
       "security_groups": ["image-build"]
     }
   ],

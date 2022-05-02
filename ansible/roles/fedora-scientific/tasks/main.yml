@@ -10,3 +10,8 @@
   copy:
     src: kscreenlockerrc
     dest: /etc/xdg/
+
+- name: enable wheel group permissions for polkit
+  copy:
+    src: 49-nopasswd_global.rules
+    dest: /etc/polkit-1/rules.d/49-nopasswd_global.rules

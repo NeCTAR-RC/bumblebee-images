@@ -1,0 +1,4 @@
+---
+rstudio_dependencies: []
+
+rstudio_package_url: "https://s3.amazonaws.com/rstudio-ide-build/desktop/{% if ansible_distribution_major_version == '7' %}centos7{% else %}rhel8{% endif %}/x86_64/rstudio-{{ rstudio_version }}-x86_64.rpm"

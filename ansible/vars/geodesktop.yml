@@ -1,0 +1,27 @@
+---
+image_name: GeoDesktop
+
+rstudio_version: 2022.02.2-485
+rstudio_server_version: "{{ rstudio_version }}"
+r_cran_mirror: https://cran.ms.unimelb.edu.au
+r_install_dev: true
+
+r_install:
+  - libhdf4-0-alt
+  - hdf4-tools
+  - libnetcdf-dev
+  - netcdf-bin
+  - proj-bin
+  - libproj-dev
+  - libgdal-dev
+  - gdal-bin
+  - libudunits2-dev
+  - libmagick++-dev    # required by animation package
+  - libprotobuf-dev    # required by crawl package
+  - protobuf-compiler  # required by crawl package
+  - libjq-dev          # required by crawl package
+  - libssl-dev         # required by devtools,httr package
+
+r_packages:
+  - name: crawl
+

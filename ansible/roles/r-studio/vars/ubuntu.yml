@@ -1,0 +1,6 @@
+---
+rstudio_dependencies:
+  - libxkbcommon-x11-0  # core dumped without it
+
+# Yes, we use Bionic even for Focal
+rstudio_package_url: "https://s3.amazonaws.com/rstudio-ide-build/desktop/bionic/amd64/rstudio-{{ rstudio_version }}-amd64.deb"

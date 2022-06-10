@@ -46,7 +46,6 @@ neurodesk_extra_packages:
   - git
   - cryptsetup-bin
   - lsb-release
-  - rclone
   - davfs2
   - firefox
   - python3-distutils

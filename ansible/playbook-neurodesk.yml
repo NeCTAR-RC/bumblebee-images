@@ -5,6 +5,7 @@
 
   vars_files:
     - vars/main.yml
+    - vars/neurodesk.yml
 
   roles:
     - image-name
@@ -15,6 +16,7 @@
     - singularity
     - neurodesk
     - vscode
+    - common
     - xrdp
     - config
     - testing

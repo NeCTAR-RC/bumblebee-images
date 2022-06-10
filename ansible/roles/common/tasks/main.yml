@@ -1,0 +1,20 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ vars_item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+  loop_control:
+    loop_var: vars_item
+
+- name: Install common packages
+  package:
+    name: "{{ common_packages }}"
+    state: present
+
+# Goofys S3 mounter
+- name: Download goofys
+  get_url:
+    url: "https://github.com/kahing/goofys/releases/download/{{ goofys_version }}/goofys"
+    dest: /usr/local/bin/goofys
+    mode: 0777

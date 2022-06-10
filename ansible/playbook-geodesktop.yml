@@ -5,14 +5,20 @@
 
   vars_files:
     - vars/main.yml
+    - vars/geodesktop.yml
 
   roles:
     - image-name
     - default-user
     - setup
-    - fedora-scientific
+    - xfce4-desktop
+#    - geodesktop
     - common
+    - anaconda
     - xrdp
+    - r
+    - r-studio
+    - owncloud-client
     - config
     - testing
     - nectar-user

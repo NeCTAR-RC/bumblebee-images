@@ -52,6 +52,21 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # Geodesktop
+  config.vm.define "geodesktop" do |c|
+    c.vm.box = "generic/ubuntu2004"
+    c.vm.provider "virtualbox" do |v, override|
+      override.vm.box = "ubuntu/focal64"
+    end
+    c.vm.provision "ansible" do |ansible|
+      ansible.compatibility_mode = "2.0"
+      ansible.extra_vars = { nectar_test_build: true,
+                             ansible_python_interpreter: "/usr/bin/python3" }
+      ansible.playbook = "ansible/playbook-geodesktop.yml"
+      ansible.become = true
+    end
+  end
+
   # Bumblebee Guacamole Server
   config.vm.define "guacamole" do |c|
     c.vm.box = "generic/ubuntu2004"

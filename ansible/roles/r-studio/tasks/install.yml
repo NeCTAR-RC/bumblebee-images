@@ -1,0 +1,20 @@
+# tasks file for rstudio
+---
+- name: Include OS-specific variables
+  include_vars: "{{ vars_item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+  loop_control:
+    loop_var: vars_item
+
+- name: Install R-Studio (apt)
+  apt:
+    deb: "{{ rstudio_package_url }}"
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install R-Studio (yum)
+  yum:
+    name: "{{ rstudio_package_url }}"
+    state: present
+  when: ansible_pkg_mgr == 'yum'

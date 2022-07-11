@@ -47,18 +47,18 @@ r_install:
   - r-cran-dplyr
   - libgdal-dev
   - gdal-bin
-#  - libhdf4-0-alt
-#  - hdf4-tools
-#  - libnetcdf-dev
-#  - netcdf-bin
-#  - proj-bin
-#  - libproj-dev
-#  - libudunits2-dev
-#  - libmagick++-dev    # required by animation package
+  - libhdf4-0-alt
+  - hdf4-tools
+  - libnetcdf-dev
+  - netcdf-bin
+  - proj-bin
+  - libproj-dev
+  - libudunits2-dev
+  - libmagick++-dev    # required by animation package
   - libprotobuf-dev    # required by crawl package
   - protobuf-compiler  # required by crawl package
   - libjq-dev          # required by crawl package
-#  - libssl-dev         # required by devtools,httr package
+  - libssl-dev         # required by devtools,httr package
 
 r_packages:
   - name: crawl

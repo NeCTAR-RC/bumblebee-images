@@ -1,6 +1,11 @@
 ---
 image_name: GeoDesktop
 
+extra_packages:
+  - qgis
+  - postgresql-client-common
+  - pgadmin3
+
 anaconda_install_channels: conda-forge
 anaconda_install_packages:
   - astropy

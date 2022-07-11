@@ -11,3 +11,9 @@
     repo: "deb {{ r_repository }}"
     state: present
     update_cache: true
+
+- name: repository | add c2d4u repository
+  apt_repository:
+    repo: 'ppa:c2d4u.team/c2d4u4.0+'
+    state: present
+    update_cache: true

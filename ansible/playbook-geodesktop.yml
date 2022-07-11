@@ -12,10 +12,9 @@
     - default-user
     - setup
     - xfce4-desktop
-#    - geodesktop
+    - xrdp
     - common
     - anaconda
-    - xrdp
     - r
     - r-studio
     - owncloud-client

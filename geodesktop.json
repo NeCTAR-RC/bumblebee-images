@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "openstack",
-      "flavor": "t3.small",
+      "flavor": "m3.small",
       "image_name": "GeoDesktop",
       "source_image": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
       "availability_zone": "melbourne-qh2",
@@ -13,7 +13,10 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/playbook-geodesktop.yml"
+      "playbook_file": "ansible/playbook-geodesktop.yml",
+      "extra_arguments": [
+        "--ssh-extra-args", "-o IdentitiesOnly=yes"
+      ]
     },
     {
       "type": "shell",

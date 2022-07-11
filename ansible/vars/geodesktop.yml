@@ -1,27 +1,70 @@
 ---
 image_name: GeoDesktop
 
+anaconda_install_channels: conda-forge
+anaconda_install_packages:
+  - astropy
+  - dask
+  - dask-labextension
+  - gdal
+  - geopandas
+  - hdf5
+  - ipdb
+  - jupyterlab
+  - memory_profiler
+  - numba
+  - numpy
+  - pandas
+  - pyreadr
+  - rasterstats
+  - rioxarray
+  - xarray
+
 rstudio_version: 2022.02.2-485
 rstudio_server_version: "{{ rstudio_version }}"
 r_cran_mirror: https://cran.ms.unimelb.edu.au
 r_install_dev: true
 
 r_install:
-  - libhdf4-0-alt
-  - hdf4-tools
-  - libnetcdf-dev
-  - netcdf-bin
-  - proj-bin
-  - libproj-dev
+  - r-cran-igraph
+  - r-cran-lme4
+  - r-cran-devtools
+  - r-cran-roxygen2
+  - r-cran-sp
+  - r-cran-maps
+  - r-cran-mapdata
+  - r-cran-ncdf4
+  - r-cran-ggplot2
+  - r-cran-mime
+  - r-cran-markdown
+  - r-cran-rmarkdown
+  - r-cran-tidyverse
+  - r-cran-dplyr
   - libgdal-dev
   - gdal-bin
-  - libudunits2-dev
-  - libmagick++-dev    # required by animation package
+#  - libhdf4-0-alt
+#  - hdf4-tools
+#  - libnetcdf-dev
+#  - netcdf-bin
+#  - proj-bin
+#  - libproj-dev
+#  - libudunits2-dev
+#  - libmagick++-dev    # required by animation package
   - libprotobuf-dev    # required by crawl package
   - protobuf-compiler  # required by crawl package
   - libjq-dev          # required by crawl package
-  - libssl-dev         # required by devtools,httr package
+#  - libssl-dev         # required by devtools,httr package
 
 r_packages:
   - name: crawl
-
+  - name: sf
+  - name: raster
+  - name: terra
+  - name: exactextractr
+  - name: leaflet
+  - name: rgdal
+  - name: targets
+  - name: tarchetypes
+  - name: visNetwork
+  - name: dplyr
+  - name: gstat

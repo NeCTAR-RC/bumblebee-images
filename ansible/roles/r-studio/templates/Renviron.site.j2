@@ -1,4 +1,5 @@
-# {{ ansible_managed }}
+# Locally installed packages
+R_LIBS=/usr/local/lib/R/site-library/
 
 {% if rstudio_disable_check_for_updates is defined %}
 RSTUDIO_DISABLE_CHECK_FOR_UPDATES={{ rstudio_disable_check_for_updates }}

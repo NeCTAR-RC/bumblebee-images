@@ -54,7 +54,7 @@ r_install:
   - proj-bin
   - libproj-dev
   - libudunits2-dev
-  - libsodium          # required by sodium for cloudstoR
+  - libsodium-dev      # required by sodium for cloudstoR
   - libmagick++-dev    # required by animation package
   - libprotobuf-dev    # required by crawl package
   - protobuf-compiler  # required by crawl package

@@ -1,5 +1,4 @@
 ---
 common_packages:
-  - s3fs
+  - s3fs-fuse
   - rclone
-  - rclone-browser

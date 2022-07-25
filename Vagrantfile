@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true,
                              ansible_python_interpreter: "/usr/bin/python3" }
-      ansible.playbook = "ansible/playbook-xfce4.yml"
+      ansible.playbook = "ansible/playbook-ubuntu-20.04.yml"
       ansible.become = true
     end
   end
@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
     c.vm.provision "ansible" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true }
-      ansible.playbook = "ansible/playbook-mate.yml"
+      ansible.playbook = "ansible/playbook-centos-7.yml"
       ansible.become = true
     end
   end

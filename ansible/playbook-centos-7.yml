@@ -14,6 +14,7 @@
     - common
     - xrdp
     - owncloud-client
+    - openstack-clients
     - config
     - testing
     - nectar-user

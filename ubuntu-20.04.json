@@ -13,7 +13,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/playbook-xfce4.yml"
+      "playbook_file": "ansible/playbook-ubuntu-20.04.yml"
     },
     {
       "type": "shell",

@@ -13,7 +13,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/playbook-mate.yml"
+      "playbook_file": "ansible/playbook-centos-7.yml"
     },
     {
       "type": "shell",

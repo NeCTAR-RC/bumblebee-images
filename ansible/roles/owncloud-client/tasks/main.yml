@@ -1,46 +1,8 @@
 ---
-- name: Get ownCloud repository key for Ubuntu
-  apt_key:
-    url: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_{{ ansible_distribution_version }}/Release.key"
-    state: present
-  when: ansible_distribution == 'Ubuntu'
-
-- name: Add ownCloud repository for Ubuntu
-  apt_repository:
-    repo: "deb https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_{{ ansible_distribution_version }}/ /"
-    filename: owncloud
-    update_cache: yes
-    state: present
-  when: ansible_distribution == 'Ubuntu'
-
-- name: Import ownCloud repository key for CentOS
-  rpm_key:
-    state: present
-    key: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/CentOS_{{ ansible_distribution_major_version }}/repodata/repomd.xml.key"
-  when: ansible_distribution == 'CentOS'
-
-- name: Add ownCloud repository for CentOS
-  yum_repository:
-    name: owncloud
-    description: owncloud
-    baseurl: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/CentOS_{{ ansible_distribution_major_version }}"
-    gpgcheck: yes
-    gpgkey: "https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/CentOS_{{ ansible_distribution_major_version }}/repodata/repomd.xml.key"
-  when: ansible_distribution == 'CentOS'
-
-- name: install ownCloud client
-  package:
-    name: owncloud-client
-    state: present
-
-- name: Remove ownCloud repository for Ubuntu
-  apt_repository:
-    repo: "deb https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_{{ ansible_distribution_version }}/ /"
-    state: absent
-  when: ansible_distribution == 'Ubuntu'
-
-- name: Add ownCloud repository for CentOS
-  yum_repository:
-    name: owncloud
-    state: absent
-  when: ansible_distribution == 'CentOS'
+- name: Include OS-specific tasks
+  include_tasks: "{{ tasks_item }}"
+  with_first_found:
+    - "setup-{{ ansible_distribution | lower }}.yml"
+    - "setup-{{ ansible_os_family | lower }}.yml"
+  loop_control:
+    loop_var: tasks_item

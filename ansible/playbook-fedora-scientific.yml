@@ -5,6 +5,7 @@
 
   vars_files:
     - vars/main.yml
+    - vars/fedora-scientific.yml
 
   roles:
     - image-name

@@ -1,0 +1,2 @@
+---
+image_name: "{{ organisation_name }} Fedora Scientific {{ application_name }}"

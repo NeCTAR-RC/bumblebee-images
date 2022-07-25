@@ -18,6 +18,11 @@ Vagrant.configure("2") do |config|
   # Generic CentOS 7
   config.vm.define "centos-7" do |c|
     c.vm.box = "centos/7"
+      c.vm.provision "shell" do |shell|
+        # Our official images have epel pre-installed
+        shell.inline = "sudo yum -y -q install epel-release"
+      end
+
     c.vm.provision "ansible" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true }

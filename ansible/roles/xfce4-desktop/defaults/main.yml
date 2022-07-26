@@ -5,7 +5,6 @@ xfce4_apt_packages:
 
 remove_apt_packages:
   - apport  # nuke the system program problem detected alert
-  - at-spi2-core
   - blueman
   - bluez
   - evolution-data-server

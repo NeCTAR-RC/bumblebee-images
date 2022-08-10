@@ -2,3 +2,4 @@
 common_packages:
   - s3fs-fuse
   - rclone
+  - filezilla

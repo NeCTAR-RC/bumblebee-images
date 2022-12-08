@@ -1,5 +1,5 @@
 [Unit]
-Description=Setup CVMFS
+Description=Neurocommand update
 After=network.target
 Before=bumblebee-phone-home.service
 
@@ -7,7 +7,7 @@ Before=bumblebee-phone-home.service
 Type=oneshot
 RemainAfterExit=true
 StandardOutput=journal+console
-ExecStart=/usr/local/sbin/setup-cvmfs.sh
+ExecStart=/usr/local/sbin/neurocommand-update.sh
 
 [Install]
 WantedBy=default.target

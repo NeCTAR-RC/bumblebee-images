@@ -12,3 +12,19 @@
   with_items:
     - ./build.sh --lxde --edit
     - ./install.sh
+
+- name: Copy Neurocommand update script
+  copy:
+    src: neurocommand-update.sh
+    dest: /usr/local/sbin/neurocommand-update.sh
+    mode: '0755'
+
+- name: Copy Neurocommand update systemd unit file
+  copy:
+    src: neurocommand-update.service
+    dest: /etc/systemd/system/neurocommand-update.service
+
+- name: Enable Neurocommand update service
+  systemd:
+    name: neurocommand-update
+    enabled: yes

@@ -14,7 +14,7 @@
   apt_repository:
     repo: 'ppa:johnmullen/xrdp'
     state: present
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version < '22'
 
 - name: Install XRDP
   package:
@@ -25,7 +25,7 @@
   apt_repository:
     repo: 'ppa:johnmullen/xrdp'
     state: absent
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version < '22'
 
 # Without this, TLS negotiation fails as the XRDP user is unable to read
 # the self-signed cert/key

@@ -18,8 +18,13 @@
 
 - name: Install background
   copy:
-    src: files/background.svg
-    dest: /usr/share/backgrounds/background.svg
+    src: files/nectar-background.svg
+    dest: /usr/share/xfce4/backdrops/nectar.svg
+
+- name: Install menu icon
+  copy:
+    src: files/nectar-hex-gloss.svg
+    dest: /usr/share/pixmaps/nectar.svg
 
 - name: create kiosk dir
   file:
@@ -31,12 +36,21 @@
     src: files/xfce4/kiosk/kioskrc
     dest: /etc/xdg/xfce4/kiosk/kioskrc
 
+- name: create terminal dir
+  file:
+    path: /etc/xdg/xfce4/terminal
+    state: directory
+
+- name: Install terminalrc
+  copy:
+    src: files/xfce4/terminal/terminalrc
+    dest: /etc/xdg/xfce4/terminal/terminalrc
+
 - name: copy xfce4 default config
   copy:
     src: 'files/xfce4/xfconf/xfce-perchannel-xml/{{ item }}'
     dest: '/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/{{ item }}'
   with_items:
-    - xfce4-panel.xml
     - xfce4-desktop.xml
     - xfce4-power-manager.xml
     - xfce4-screensaver.xml
@@ -49,3 +63,4 @@
     enabled: false
 
 - include_tasks: policies.yml
+- include_tasks: panel.yml

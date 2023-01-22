@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "openstack",
-      "flavor": "t3.small",
+      "flavor": "m3.small",
       "image_name": "NeCTAR Ubuntu 20.04 LTS (Focal) Virtual Desktop",
       "source_image": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
       "availability_zone": "melbourne-qh2",

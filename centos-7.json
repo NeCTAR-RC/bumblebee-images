@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "openstack",
-      "flavor": "t3.small",
+      "flavor": "m3.small",
       "image_name": "NeCTAR CentOS 7 Virtual Desktop",
       "source_image": "NeCTAR CentOS 7 x86_64",
       "availability_zone": "melbourne-qh2",

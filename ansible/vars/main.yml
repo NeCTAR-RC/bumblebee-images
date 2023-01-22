@@ -2,3 +2,6 @@
 organisation_name: NeCTAR
 application_name: Virtual Desktop
 locale: en_AU.UTF-8
+
+extra_packages:
+  - firefox

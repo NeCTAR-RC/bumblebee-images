@@ -4,7 +4,12 @@
       "type": "openstack",
       "flavor": "m3.small",
       "image_name": "Guacamole Server",
-      "source_image": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
+      "source_image_filter": {
+        "filters": {
+          "name": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
+          "visibility": "public"
+        }
+      },
       "availability_zone": "melbourne-qh2",
       "ssh_username": "ubuntu",
       "security_groups": ["image-build"]

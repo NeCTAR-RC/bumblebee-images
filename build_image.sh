@@ -51,13 +51,8 @@ FACT_DIR=ansible/.facts
 TAG_DIR=ansible/.tags
 rm -fr $FACT_DIR $TAG_DIR
 
-# Get the latest Focal image
-SOURCE_NAME=$(jq -r '.builders[0].source_image' $FILE)
-SOURCE_ID=$(openstack image list -f value -c ID --public --name "$SOURCE_NAME" | head -n1)
-echo "Found base image $SOURCE_NAME ($SOURCE_ID)..."
-
 # Update the name to include build number
-jq ".builders[0].source_image = \"$SOURCE_ID\" | .builders[0].image_name = \"$BUILD_NAME\" | .builders[0].availability_zone = \"$AZ\"" $FILE > /tmp/${BUILD_NAME}_packer.json
+jq ".builders[0].image_name = \"$BUILD_NAME\" | .builders[0].availability_zone = \"$AZ\"" $FILE > /tmp/${BUILD_NAME}_packer.json
 
 echo "Building image ${IMAGE_NAME}..."
 packer build /tmp/${BUILD_NAME}_packer.json
@@ -94,4 +89,4 @@ echo "Image build successful"
 openstack image show --max-width=120 $IMAGE_ID
 
 echo "Creating bootable volume..."
-openstack volume create --bootable --size 10 --availability-zone $AZ --image $IMAGE_ID "$IMAGE_NAME"
+openstack volume create --bootable --size 50 --availability-zone $AZ --image $IMAGE_ID "$IMAGE_NAME"

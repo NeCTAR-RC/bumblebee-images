@@ -4,7 +4,12 @@
       "type": "openstack",
       "flavor": "m3.small",
       "image_name": "NeCTAR CentOS 7 Virtual Desktop",
-      "source_image": "NeCTAR CentOS 7 x86_64",
+      "source_image_filter": {
+        "filters": {
+          "name": "NeCTAR CentOS 7 x86_64",
+          "visibility": "public"
+        }
+      },
       "availability_zone": "melbourne-qh2",
       "ssh_username": "ec2-user",
       "security_groups": ["image-build"]

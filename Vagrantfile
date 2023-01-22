@@ -10,7 +10,22 @@ Vagrant.configure("2") do |config|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true,
                              ansible_python_interpreter: "/usr/bin/python3" }
-      ansible.playbook = "ansible/playbook-ubuntu-20.04.yml"
+      ansible.playbook = "ansible/playbook-ubuntu.yml"
+      ansible.become = true
+    end
+  end
+
+  # Generic Ubuntu 22.04 (jammy)
+  config.vm.define "ubuntu-2204" do |c|
+    c.vm.box = "generic/ubuntu2004"
+    c.vm.provider "virtualbox" do |v, override|
+      override.vm.box = "ubuntu/jammy64"
+    end
+    c.vm.provision "ansible" do |ansible|
+      ansible.compatibility_mode = "2.0"
+      ansible.extra_vars = { nectar_test_build: true,
+                             ansible_python_interpreter: "/usr/bin/python3" }
+      ansible.playbook = "ansible/playbook-ubuntu.yml"
       ansible.become = true
     end
   end

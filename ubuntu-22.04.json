@@ -2,14 +2,14 @@
   "builders": [
     {
       "type": "openstack",
-      "flavor": "m3.small",
-      "image_name": "NeCTAR Ubuntu 20.04 LTS (Focal) Virtual Desktop",
+      "image_name": "NeCTAR Ubuntu 22.04 LTS (Jammy) Virtual Desktop",
       "source_image_filter": {
         "filters": {
-          "name": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
+          "name": "NeCTAR Ubuntu 22.04 LTS (Jammy) amd64",
           "visibility": "public"
         }
       },
+      "flavor": "m3.small",
       "availability_zone": "melbourne-qh2",
       "ssh_username": "ubuntu",
       "security_groups": ["image-build"]
@@ -18,7 +18,12 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/playbook-ubuntu.yml"
+      "use_proxy": "false",
+      "playbook_file": "ansible/playbook-ubuntu.yml",
+      "extra_arguments": [
+        "--ssh-extra-args",
+        "-o IdentitiesOnly=yes"
+      ]
     },
     {
       "type": "shell",

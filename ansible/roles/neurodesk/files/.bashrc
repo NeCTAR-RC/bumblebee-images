@@ -22,4 +22,8 @@ if [ -f '/usr/share/module.sh' ]; then
         fi
 fi
 
+# This sets the freesurfer subject output directory: Please change if you would like your freesurfer outputs to be stored somewhere else.
+export SINGULARITYENV_SUBJECTS_DIR=~/freesurfer-subjects-dir
+
 export PATH="/usr/local/singularity/bin:${PATH}"
+export PATH=$PATH:~/.local/bin

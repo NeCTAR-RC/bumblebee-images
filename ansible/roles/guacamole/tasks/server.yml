@@ -6,7 +6,7 @@
 
 - name: Download Guacamole server
   get_url:
-    url: "https://mirror.aarnet.edu.au/pub/apache/guacamole/{{ guacamole_version }}/source/guacamole-server-{{ guacamole_version }}.tar.gz"
+    url: "https://archive.apache.org/dist/guacamole/{{ guacamole_version }}/source/guacamole-server-{{ guacamole_version }}.tar.gz"
     dest: "/tmp/guacamole-server-{{ guacamole_version }}.tar.gz"
 
 - name: Extract Guacamole server

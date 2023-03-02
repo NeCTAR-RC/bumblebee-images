@@ -1,7 +1,7 @@
 ---
 - name: Download Guacamole OIDC auth plugin
   get_url:
-    url: "https://downloads.apache.org/guacamole/{{ guacamole_version }}/binary/guacamole-auth-sso-{{ guacamole_version }}.tar.gz"
+    url: "https://archive.apache.org/dist/guacamole/{{ guacamole_version }}/binary/guacamole-auth-sso-{{ guacamole_version }}.tar.gz"
     dest: /tmp
 
 - name: Extract Guacamole OIDC auth plugin

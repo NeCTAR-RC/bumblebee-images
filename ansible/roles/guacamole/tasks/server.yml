@@ -1,8 +1,9 @@
 ---
 - name: Install dependencies for Guacamole
-  package:
+  apt:
     name: '{{ guacamole_packages }}'
     state: 'latest'
+    update_cache: true
 
 - name: Download Guacamole server
   get_url:

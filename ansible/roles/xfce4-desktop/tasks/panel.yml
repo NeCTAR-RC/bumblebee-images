@@ -6,5 +6,5 @@
 
 - name: Copy customised panel config
   copy:
-    src: nectar-xfce4-panel.tar.bz2
+    src: "{{ ansible_distribution_release }}-nectar-xfce4-panel.tar.bz2"
     dest: /usr/share/xfce4-panel-profiles/layouts/Nectar.tar.bz2

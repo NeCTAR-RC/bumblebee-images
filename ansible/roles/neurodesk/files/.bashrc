@@ -3,17 +3,16 @@ if [ -f '/usr/share/module.sh' ]; then source /usr/share/module.sh; fi
 
 alias ll='ls -la'
 
-if [ -d /cvmfs/neurodesk.ardc.edu.au/neurodesk-modules ]; then
-        # export MODULEPATH="/cvmfs/neurodesk.ardc.edu.au/neurodesk-modules"
-        module use /cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/*
-else
-        export MODULEPATH="/neurodesktop-storage/containers/modules"              
-        module use $MODULEPATH
-        export CVMFS_DISABLE=true
-fi
-
 
 if [ -f '/usr/share/module.sh' ]; then
+        if [ -d /cvmfs/neurodesk.ardc.edu.au/neurodesk-modules ]; then
+                module use /cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/*
+        else
+                export MODULEPATH="/neurodesktop-storage/containers/modules"
+                module use $MODULEPATH
+                export CVMFS_DISABLE=true
+        fi
+
         echo 'Run "ml av" to see which tools are available - use "ml <tool>" to use them in this shell.'
         if [ -v "$CVMFS_DISABLE" ]; then
                 if [ ! -d $MODULEPATH ]; then
@@ -22,8 +21,10 @@ if [ -f '/usr/share/module.sh' ]; then
         fi
 fi
 
+
 # This sets the freesurfer subject output directory: Please change if you would like your freesurfer outputs to be stored somewhere else.
 export SINGULARITYENV_SUBJECTS_DIR=~/freesurfer-subjects-dir
 
 export PATH="/usr/local/singularity/bin:${PATH}"
 export PATH=$PATH:~/.local/bin
+export neurodesk_singularity_opts="${neurodesk_singularity_opts} --bind /neurodesktop-storage "

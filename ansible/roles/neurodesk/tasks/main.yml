@@ -56,11 +56,12 @@
     src: /neurodesktop-storage
     dest: /etc/skel/Desktop/neurodesktop-storage
     state: link
-- name: Create a symbolic link
+- name: Create a symbolic link to upload directory (has to be forced because home does not yet exist at buildtime)
   file:
     src: /home/vdiuser/thinclient_drives/GUACFS
     dest: /etc/skel/Desktop/transfer
     state: link
+    force: true
     
     
 #TODO(andybotting): Not needed outside a container?

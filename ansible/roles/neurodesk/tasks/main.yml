@@ -51,7 +51,7 @@
     path: /etc/skel/Desktop
     state: directory
 
-- name: Create a symbolic link to neurodesktop-storage
+- name: Create a symbolic link to upload directory (has to be forced because home does not yet exist at buildtime)
   file:
     src: /neurodesktop-storage
     dest: /etc/skel/Desktop/neurodesktop-storage
@@ -61,8 +61,8 @@
     src: /home/vdiuser/thinclient_drives/GUACFS
     dest: /etc/skel/Desktop/transfer
     state: link
-    
-    
+    force: true
+
 #TODO(andybotting): Not needed outside a container?
 # Allow the root user to access the sshfs mount
 # https://github.com/NeuroDesk/neurodesk/issues/47

@@ -21,6 +21,15 @@
     name: '{{ xrdp_packages }}'
     state: present
 
+# Take this out as soon as XRDP https://koji.fedoraproject.org/koji/buildinfo?buildID=2204549
+# migrates from testing to main
+- name: Install fixed version of XRDP
+  ansible.builtin.yum:
+    name: https://kojipkgs.fedoraproject.org/packages/xrdp/0.9.22.1/2.el7/x86_64/xrdp-0.9.22.1-2.el7.x86_64.rpm
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '7'
+
 - name: Add XRDP PPA for Ubuntu
   apt_repository:
     repo: 'ppa:johnmullen/xrdp'

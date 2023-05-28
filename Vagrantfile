@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
     c.vm.box = "centos/7"
       c.vm.provision "shell" do |shell|
         # Our official images have epel pre-installed
-        shell.inline = "sudo yum -y -q install epel-release"
+        shell.inline = "yum -y -q install epel-release"
       end
 
     c.vm.provision "ansible" do |ansible|
@@ -55,6 +55,22 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "ansible/playbook-fedora-scientific.yml"
       ansible.become = true
     end
+  end
+
+  # Rocky Linux 9
+  config.vm.define "rocky-9" do |c|
+    c.vm.box = "rockylinux/9"
+    c.vm.provision "shell" do |shell|
+      # Our official images have epel pre-installed
+      shell.inline = "dnf -y install epel-release && dnf config-manager --enable crb"
+    end
+    c.vm.provision "ansible" do |ansible|
+      ansible.compatibility_mode = "2.0"
+      ansible.extra_vars = { nectar_test_build: true }
+      ansible.playbook = "ansible/playbook-rocky-9.yml"
+      ansible.become = true
+    end
+
   end
 
   # NeuroDesk
@@ -107,7 +123,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 8080, host: 8080, host_ip: '0.0.0.0'
   config.vm.provider :libvirt do |v|
     v.memory = 4096
-    v.cpus = 4
+    v.cpus = 2
   end
   config.vm.provider :virtualbox do |v|
     v.memory = 2048

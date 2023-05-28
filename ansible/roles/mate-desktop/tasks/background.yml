@@ -3,7 +3,7 @@
   copy:
     src: background.svg
     dest: /usr/share/backgrounds/
-  when: ansible_distribution == "CentOS"
+  when: ansible_os_family == 'RedHat'
 
 - name: copy the background image config file over
   template:
@@ -12,7 +12,7 @@
     owner: root
     group: root
     mode: 0644
-  when: ansible_distribution == "CentOS"
+  when: ansible_os_family == 'RedHat'
 
 - name: copy background.svg over
   become: yes

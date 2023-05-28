@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - image-name
+    - default-user
+    - setup
+    - xfce4-desktop
+    - common
+    - xrdp
+    - openstack-clients
+    - config
+    - testing
+    - nectar-user
+    - facts
+    - cleanup

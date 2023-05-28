@@ -51,5 +51,7 @@
   copy:
     dest: /etc/machine-id
     content: ''
-  when: etc_machine_id.stat.exists == True
+  when:
+    - etc_machine_id.stat.exists == True
+    - default_user != "vagrant"
   ignore_errors: yes

@@ -11,7 +11,7 @@
         }
       },
       "availability_zone": "melbourne-qh2",
-      "ssh_username": "ec2-user",
+      "ssh_username": "rocky",
       "security_groups": ["image-build"]
     }
   ],

@@ -14,6 +14,12 @@
     state: present
     allowerasing: true
 
+- name: Ensure PulseAudio is enabled for the user account
+  ansible.builtin.systemd:
+    name: pulseaudio.service
+    scope: global
+    state: enabled
+
 # To build, follow the instructions from
 #  https://github.com/neutrinolabs/pulseaudio-module-xrdp/wiki/README
 - name: Install XRDP PulseAudio modules

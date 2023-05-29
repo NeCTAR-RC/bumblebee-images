@@ -1,5 +1,12 @@
 ---
 xfce_packages:
+- '@base-x'
+- '@guest-desktop-agents'
+- '@standard'
+- '@core'
+- '@fonts'
+- '@multimedia'
+- '@internet-browser'
 - '@Xfce'
 - libXcomposite
 - libXdamage
@@ -29,12 +36,17 @@ xfce_packages:
 - thunar-archive-plugin
 - thunar-volman
 - tumbler
+- mousepad
+- ristretto
 - xfce-polkit
 - wget
 - xdg-user-dirs
 - xdg-user-dirs-gtk
 - gstreamer1-plugins-ugly-free
 - gstreamer1-plugins-bad-free
+- python3-gobject  # needed for xfce3-panel-profile
+- langpacks-en
+- glibc-all-langpacks
 
 xfce_remove_packages:
 - autofs

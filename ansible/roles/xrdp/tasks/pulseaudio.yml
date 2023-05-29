@@ -18,7 +18,7 @@
   ansible.builtin.systemd:
     name: pulseaudio.service
     scope: global
-    state: enabled
+    enabled: true
 
 # To build, follow the instructions from
 #  https://github.com/neutrinolabs/pulseaudio-module-xrdp/wiki/README

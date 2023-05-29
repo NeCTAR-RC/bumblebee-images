@@ -65,6 +65,7 @@ xfce_remove_packages:
 - gdm
 - gnome-shell
 - network-manager-applet
+- firewalld
 
 xfce_theme: Adwaita
 xfce_icon_theme: Adwaita

@@ -8,6 +8,12 @@
     - "{{ ansible_os_family }}.yml"
     - "default.yml"
 
+- name: Install pulseaudio
+  ansible.builtin.dnf:
+    name: pulseaudio
+    state: present
+    allowerasing: true
+
 # To build, follow the instructions from
 #  https://github.com/neutrinolabs/pulseaudio-module-xrdp/wiki/README
 - name: Install XRDP PulseAudio modules

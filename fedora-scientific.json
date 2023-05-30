@@ -6,22 +6,23 @@
       "image_name": "Fedora Scientific",
       "source_image_filter": {
         "filters": {
-          "name": "NeCTAR Fedora 36 x86_64",
+          "name": "NeCTAR Fedora 38 x86_64",
           "visibility": "public"
         }
       },
       "availability_zone": "melbourne-qh2",
       "ssh_username": "fedora",
-      "ssh_keypair_name": "packer-ssh-key",
-      "ssh_private_key_file": "packer-ssh-key",
       "security_groups": ["image-build"]
     }
   ],
   "provisioners": [
     {
       "type": "ansible",
+      "use_proxy": "false",
       "playbook_file": "ansible/playbook-fedora-scientific.yml",
       "extra_arguments": [
+        "--ssh-extra-args",
+        "-o IdentitiesOnly=yes",
         "--extra-vars",
         "image_name='Fedora Scientific'"
       ]

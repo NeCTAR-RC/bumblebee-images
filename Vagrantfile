@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
 
   # Fedora Scientific
   config.vm.define "fedora-scientific" do |c|
-    c.vm.box = "fedora/36-cloud-base"
+    c.vm.box = "fedora/38-cloud-base"
     c.vm.provision "ansible" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.extra_vars = { nectar_test_build: true }

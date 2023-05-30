@@ -19,7 +19,6 @@ fedora_scientific_packages:
 - apache-commons-math
 - armadillo-devel
 - backintime-kde
-- bibtex2html
 - blitz-devel
 - ddd
 - dia

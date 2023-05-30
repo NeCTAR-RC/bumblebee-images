@@ -1,6 +1,5 @@
 ---
 - name: install Fedora Scientific packages
-  become: yes
   dnf:
     name: "{{ fedora_scientific_packages }}"
     exclude: "{{ fedora_scientific_packages_exclude }}"
@@ -15,3 +14,13 @@
   copy:
     src: 49-nopasswd_global.rules
     dest: /etc/polkit-1/rules.d/49-nopasswd_global.rules
+
+- name: Disable suspend and hibernation
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    masked: yes
+  with_items:
+    - sleep.target
+    - suspend.target
+    - hibernate.target
+    - hybrid-sleep.target

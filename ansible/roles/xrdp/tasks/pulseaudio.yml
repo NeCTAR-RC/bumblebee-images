@@ -8,11 +8,13 @@
     - "{{ ansible_os_family }}.yml"
     - "default.yml"
 
+# Ensure PulseAudio replaces Pipewire for Rocky9 at least
 - name: Install pulseaudio
   ansible.builtin.dnf:
     name: pulseaudio
     state: present
     allowerasing: true
+  when: ansible_os_family == 'RedHat'
 
 - name: Ensure PulseAudio is enabled for the user account
   ansible.builtin.systemd:

@@ -1,0 +1,4 @@
+---
+rstudio_dependencies: []
+
+rstudio_package_url: "https://download1.rstudio.org/electron/rhel9/x86_64/rstudio-{{ rstudio_version }}-x86_64.rpm"

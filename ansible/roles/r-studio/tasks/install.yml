@@ -8,10 +8,21 @@
   loop_control:
     loop_var: vars_item
 
+- name: Install dependencies
+  package:
+    name: "{{ rstudio_dependencies }}"
+    state: present
+
 - name: Install R-Studio (apt)
   apt:
     deb: "{{ rstudio_package_url }}"
   when: ansible_pkg_mgr == 'apt'
+
+- name: Install R-Studio (dnf)
+  dnf:
+    name: "{{ rstudio_package_url }}"
+    state: present
+  when: ansible_pkg_mgr == 'dnf'
 
 - name: Install R-Studio (yum)
   yum:

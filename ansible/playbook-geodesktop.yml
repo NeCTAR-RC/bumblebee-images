@@ -14,6 +14,7 @@
     - xfce4-desktop
     - xrdp
     - common
+    - pgadmin
     - anaconda
     - r
     - r-studio

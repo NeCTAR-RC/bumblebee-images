@@ -4,7 +4,6 @@ image_name: GeoDesktop
 extra_packages:
   - qgis
   - postgresql-client-common
-  - pgadmin3
   - firefox
 
 anaconda_install_channels: conda-forge
@@ -26,9 +25,7 @@ anaconda_install_packages:
   - rioxarray
   - xarray
 
-rstudio_version: 2022.02.2-485
-rstudio_server_version: "{{ rstudio_version }}"
-r_cran_mirror: https://cran.ms.unimelb.edu.au
+r_cran_mirror: https://mirror.aarnet.edu.au/pub/CRAN
 r_install_dev: true
 
 r_install:
@@ -75,4 +72,3 @@ r_packages:
   - name: visNetwork
   - name: dplyr
   - name: gstat
-  - name: cloudstoR

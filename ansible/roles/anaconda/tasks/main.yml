@@ -1,0 +1,105 @@
+---
+- name: Include vars
+  ansible.builtin.include_vars:
+    file: default.yml
+
+- name: installing OS pkg dependencies
+  become: true
+  become_user: root
+  package:
+    state: present
+    name: '{{ anaconda_dep_pkgs | default([]) }}'
+
+- name: check for installation at {{ anaconda_install_exe }}
+  become: true
+  stat:
+    path: '{{ anaconda_install_exe }}'
+  changed_when: false
+  register: anaconda_conda_binary
+
+- when: not anaconda_conda_binary.stat.exists
+  block:
+    - name: ensure that {{ anaconda_tmp_dir }} directory exists
+      file:
+        path: "{{ anaconda_tmp_dir }}"
+        state: directory
+
+    - name: downloading {{ anaconda_installer_url }} to {{ anaconda_installer_tmp_sh }}
+      become: true
+      become_user: root
+      get_url:
+        url: '{{ anaconda_installer_url }}'
+        dest: '{{ anaconda_installer_tmp_sh }}'
+        timeout: '{{ anaconda_timeout_seconds }}'
+        mode: 0755
+
+    - name: launching installer {{ anaconda_installer_tmp_sh }} with bash
+      become: true
+      become_user: root
+      shell: |
+        (
+          [ ! -z "{{ anaconda_umask }}" ] && umask {{ anaconda_umask }}
+          TMPDIR={{ anaconda_tmp_dir }} bash {{ anaconda_installer_tmp_sh }} -b -p {{ anaconda_install_dir }}
+        )
+      args:
+        creates: '{{ anaconda_install_dir }}'
+
+  always:
+    - name: rm {{ anaconda_installer_tmp_sh }}
+      become: true
+      become_user: root
+      file:
+        path: '{{ anaconda_installer_tmp_sh }}'
+        state: absent
+
+- name: linking {{ anaconda_link_dir }} to {{ anaconda_install_dir }}
+  become: true
+  become_user: root
+  file:
+    src: '{{ anaconda_install_dir }}'
+    dest: '{{ anaconda_link_dir }}'
+    state: link
+
+- name: updating all conda pkgs...
+  become: true
+  become_user: root
+  when: anaconda_pkg_update
+  shell: |
+    (
+      [ ! -z "{{ anaconda_umask }}" ] && umask {{ anaconda_umask }}
+      {{ anaconda_conda_bin }} update -y --all
+    )
+
+- name: remove conda-curl since it conflicts with the system curl
+  become: true
+  become_user: root
+  conda:
+    name: curl
+    state: absent
+    executable: '{{ anaconda_conda_bin }}'
+
+- name: make system default python etc...
+  become: true
+  become_user: root
+  when: anaconda_make_sys_default
+  loop:
+    - f: anaconda.sh
+      d: /etc/profile.d
+  loop_control:
+    loop_var: tt
+  template:
+    src: '{{ tt.f }}.j2'
+    dest: '{{ tt.d }}/{{ tt.f }}'
+    mode: '{{ tt.m | default("0644") }}'
+
+- name: installing additional conda packages
+  become: true
+  become_user: root
+  conda:
+    name: '{{ pkg }}'
+    state: present
+    executable: '{{ anaconda_conda_bin }}'
+    channels: '{{ anaconda_install_channels | default("") }}'
+  loop: '{{ anaconda_install_packages | default([]) }}'
+  loop_control:
+    loop_var: pkg

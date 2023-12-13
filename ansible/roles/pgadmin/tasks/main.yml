@@ -1,0 +1,21 @@
+---
+- name: Add pgadmin apt repository key
+  ansible.builtin.get_url:
+    url: https://www.pgadmin.org/static/packages_pgadmin_org.pub
+    dest: /usr/share/keyrings/packages_pgadmin_org.pub
+
+- name: Extract ascii armor version of pgadmin apt repository key
+  ansible.builtin.command:
+    cmd: gpg --dearmor /usr/share/keyrings/packages_pgadmin_org.pub
+    creates: /usr/share/keyrings/packages_pgadmin_org.pub.gpg
+
+- name: Add pgadmin apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/packages_pgadmin_org.pub.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/{{ ansible_distribution_release }} pgadmin4 main"
+    state: present
+    update_cache: true
+
+- name: Install pgadmin package
+  ansible.builtin.apt:
+    name: pgadmin4-desktop
+    state: present

@@ -6,7 +6,7 @@
       "image_name": "GeoDesktop",
       "source_image_filter": {
         "filters": {
-          "name": "NeCTAR Ubuntu 20.04 LTS (Focal) amd64",
+          "name": "NeCTAR Ubuntu 22.04 LTS (Jammy) amd64",
           "visibility": "public"
         }
       },

@@ -9,7 +9,7 @@
           "visibility": "public"
         }
       },
-      "flavor": "m3.small",
+      "flavor": "m3.medium",
       "availability_zone": "melbourne-qh2",
       "ssh_username": "ubuntu",
       "security_groups": ["image-build"]

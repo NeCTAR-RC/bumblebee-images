@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "openstack",
-      "flavor": "m3.small",
+      "flavor": "m3.medium",
       "image_name": "Fedora Scientific",
       "source_image_filter": {
         "filters": {

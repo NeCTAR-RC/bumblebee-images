@@ -13,6 +13,12 @@
     - ./build.sh --lxde --edit
     - ./install.sh
 
+- name: Prepare a container directory for users developing their own containers and testing them before release
+  file:
+    path: /neurocommand/local/containers
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+
 - name: Copy Neurocommand update script
   copy:
     src: neurocommand-update.sh

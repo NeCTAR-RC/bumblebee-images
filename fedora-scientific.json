@@ -6,7 +6,7 @@
       "image_name": "Fedora Scientific",
       "source_image_filter": {
         "filters": {
-          "name": "NeCTAR Fedora 38 x86_64",
+          "name": "NeCTAR Fedora 40 x86_64",
           "visibility": "public"
         }
       },

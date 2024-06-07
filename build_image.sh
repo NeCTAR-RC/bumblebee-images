@@ -8,8 +8,15 @@
 
 FILE="$1"
 if [ -z "$1" ]; then
-    echo "Usage: $0 [JSONFILE]"
+    echo "Usage: $0 JSONFILE [VOL_SIZE]"
     exit 1
+fi
+
+# Optional volume size argument 
+if [ -z "$2" ]; then
+    VOL_SIZE=50
+else
+    VOL_SIZE=$2
 fi
 
 # Find packer
@@ -89,4 +96,4 @@ echo "Image build successful"
 openstack image show --max-width=120 $IMAGE_ID
 
 echo "Creating bootable volume..."
-openstack volume create --bootable --size 50 --availability-zone $AZ --image $IMAGE_ID "$IMAGE_NAME"
+openstack volume create --bootable --size $VOL_SIZE --availability-zone $AZ --image $IMAGE_ID "$IMAGE_NAME"

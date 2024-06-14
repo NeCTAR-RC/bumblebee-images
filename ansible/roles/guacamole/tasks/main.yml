@@ -1,5 +1,5 @@
 ---
-- include: server.yml
-- include: client.yml
-- include: auth-mysql.yml
-- include: auth-openid.yml
+- include_tasks: server.yml
+- include_tasks: client.yml
+- include_tasks: auth-mysql.yml
+- include_tasks: auth-openid.yml

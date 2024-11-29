@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
 import argparse
+from datetime import datetime
 import logging
 import os
 import time
+
+import openstack
 
 import cinderclient.client as cinder_client
 import glanceclient.client as glance_client
@@ -25,21 +28,6 @@ LOG.setLevel(logging.INFO)
 DRY_RUN = True
 
 
-def get_session():
-    username = os.environ.get('OS_USERNAME')
-    password = os.environ.get('OS_PASSWORD')
-    project_name = os.environ.get('OS_PROJECT_NAME')
-    auth_url = os.environ.get('OS_AUTH_URL')
-    loader = ks_loading.get_plugin_loader('password')
-    auth = loader.load_from_options(auth_url=auth_url,
-                                    username=username,
-                                    password=password,
-                                    project_name=project_name,
-                                    user_domain_name='Default',
-                                    project_domain_name='Default')
-    return ks_session.Session(auth=auth)
-
-
 def wait_for_status(status_f, res_id, status_field='status',
                     success_status=['available'], error_status=['error'],
                     sleep_time=10):
@@ -57,10 +45,15 @@ def wait_for_status(status_f, res_id, status_field='status',
     return retval
 
 
+def parse_date(ds):
+    dt = datetime.fromisoformat(ds.replace('Z', '+00:00'))
+    return dt.strftime('%Y%m%d')
+
+
 def do_stuff(args):
-    session = get_session()
-    gc = glance_client.Client('2', session=session)
-    cc = cinder_client.Client('3', session=session)
+    conn = openstack.connect(cloud='envvars')
+    gc = glance_client.Client('2', session=conn.session)
+    cc = cinder_client.Client('3', session=conn.session)
 
     zones = args.zones.split(',')
     LOG.info('Processing image ID %s for zones: %s', args.image_id, args.zones)
@@ -73,9 +66,9 @@ def do_stuff(args):
         raise
 
     image_id = image['id']
-    image_name = image['name']
-    nectar_name = image['nectar_build']
-    nectar_build = image['nectar_build']
+    nectar_name = image.get('nectar_name', image['name'])
+    nectar_build = image.get('nectar_build', parse_date(image.created_at))
+    image_name = f"{nectar_name} [{nectar_build}]"
 
     for az in zones:
         volumes = [
